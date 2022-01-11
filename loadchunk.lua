@@ -38,9 +38,7 @@ local LUA_VERSION = tonumber(string.match(_VERSION, 'Lua (.+)$'))
 -- @return fn
 -- @return err
 local function evalstr(src, env, ident)
-    if LUA_VERSION > 5.1 then
-        return load(src, ident, nil, env)
-    else
+    if LUA_VERSION <= 5.1 then
         local fn, err = loadstring(src, ident)
 
         if not err and env ~= nil then
@@ -48,7 +46,11 @@ local function evalstr(src, env, ident)
         end
 
         return fn, err
+    elseif env ~= nil then
+        return load(src, ident, nil, env)
     end
+
+    return load(src, ident)
 end
 
 --- evalfile
@@ -57,9 +59,7 @@ end
 -- @return fn
 -- @return err
 local function evalfile(file, env)
-    if LUA_VERSION > 5.1 then
-        return loadfile(file, nil, env)
-    else
+    if LUA_VERSION <= 5.1 then
         local fn, err = loadfile(file)
 
         if not err and env ~= nil then
@@ -67,7 +67,11 @@ local function evalfile(file, env)
         end
 
         return fn, err
+    elseif env ~= nil then
+        return loadfile(file, nil, env)
     end
+
+    return loadfile(file)
 end
 
 return {
