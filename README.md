@@ -1,6 +1,9 @@
 lua-loadchunk
 =========
 
+[![test](https://github.com/mah0x211/lua-loadchunk/actions/workflows/test.yml/badge.svg)](https://github.com/mah0x211/lua-loadchunk/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/mah0x211/lua-loadchunk/badge.svg?branch=master)](https://coveralls.io/github/mah0x211/lua-loadchunk?branch=master)
+
 Lua chunk loader module.
 
 ---
@@ -9,13 +12,11 @@ Lua chunk loader module.
 ## Installation
 
 ```sh
-luarocks install loadchunk --from=http://mah0x211.github.io/rocks/
+luarocks install loadchunk
 ```
 
 
-## Functions
-
-### fn, err = loadchunk.string( str [, env [, ident]] )
+## fn, err = loadchunk.string( str [, env [, ident]] )
 
 returns the compiled chunk as a function.
 
@@ -31,7 +32,7 @@ returns the compiled chunk as a function.
 - `err:string`: error message.
 
 
-### fn, err = loadchunk.file( pathname [, env] )
+## fn, err = loadchunk.file( pathname [, env] )
 
 returns the compiled chunk as a function.
 
