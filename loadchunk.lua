@@ -24,10 +24,12 @@
 -- Created by Masatoshi Teruya on 18/04/22.
 --
 --- file-scope variables
+local find = string.find
 local load = load
 local loadstring = loadstring
 local loadfile = loadfile
 local setfenv = setfenv
+local type = type
 --- constants
 local LUA_VERSION = tonumber(string.match(_VERSION, 'Lua (.+)$'))
 
@@ -59,6 +61,10 @@ end
 -- @return fn
 -- @return err
 local function evalfile(file, env)
+    if type(file) ~= 'string' or file == '' or find(file, '^%s+$') then
+        return nil, 'file must be non-empty string'
+    end
+
     if LUA_VERSION <= 5.1 then
         local fn, err = loadfile(file)
 
